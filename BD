@@ -1,0 +1,81 @@
+package InventarioProyecto;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class BaseDatos {
+    private HashMap<Integer,Libros> listaLibros = new HashMap<>();
+
+    public BaseDatos() {
+        this.listaLibros.put(1,new Libros(1,"Programacion Orientada a Objetos en Java","Ediciones de la U",10));
+        this.listaLibros.put(2,new Libros(2,"Java: Como programar","Pearson Education",4));
+        this.listaLibros.put(3,new Libros(3,"The Ruby Way","Addison-Wesley Professional",0));
+        this.listaLibros.put(4,new Libros(4,"Fundamentos de Sistemas de Base de Datos","Pearson Education",3));
+        this.listaLibros.put(5,new Libros(5,"Introduccion a los Sistemas de Base de Datos","Pearson Education",10));
+    }
+
+    public List<Libros> getListaMateriales(){
+        return new ArrayList<>(this.listaLibros.values());
+    }
+
+    public void setListaLibros(HashMap<Integer,Libros> listaLibros){
+        this.listaLibros=listaLibros;
+    }
+
+    public boolean ValidarExistencia(Libros materiales){
+        return this.listaLibros.containsKey(materiales.getCodigo());
+    }
+
+    public boolean ValidarExistencia(String nombre){
+        for (Libros m: this.listaLibros.values()){
+            if (nombre.toLowerCase().equals(m.getNombreLibro().toLowerCase())){
+             return true;   
+            }
+        }
+        return false;
+    }
+
+    public int ultimocodigo(){
+        int codigo=0;
+        for (Libros m :this.listaLibros.values() ) {
+            codigo=m.getCodigo();
+        }
+        return codigo;
+    }
+
+    public void AgregarNuevaVisualizacion (Libros m){
+        this.listaLibros.put(m.getCodigo(),m);
+    }
+
+    public void AgregarCantVisualizacion (Libros m){
+        this.listaLibros.replace(m.getCodigo(),m);
+    }
+
+    public void QuitarProducto (Libros m){
+        this.listaLibros.remove(m.getCodigo());
+    }
+
+    public String Informe(){
+        List<Libros> listaInforme = obtenerlista();
+        return listaInforme.get(0).getNombreLibro()+" "+listaInforme.get(1).getNombreLibro()+" "+listaInforme.get(2).getNombreLibro();
+    }
+
+    private List<Libros> obtenerlista(){
+        List<Libros> lista = new ArrayList<>(this.listaLibros.values());
+        List<Libros> listamayor = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Libros m = new Libros();
+            for (Libros mTemp: lista) {
+                if (mTemp.getVisualizacion()>m.getVisualizacion()) {
+                    m=mTemp;
+                }
+            }
+            listamayor.add(m);
+            lista.remove(m);
+        }
+        return listamayor;
+    }
+
+}
+
