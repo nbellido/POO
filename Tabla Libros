@@ -1,0 +1,60 @@
+package InventarioProyecto;
+
+import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TablaLibros extends AbstractTableModel {
+
+    private String[] columna = {"Codigo","Nombre Libro","Editorial","Visualizaciones"};
+    private List<Libros> libros = new ArrayList<>();
+
+    public TablaLibros(List<Libros> mat){
+        this.libros=mat;
+    }
+    
+    @Override
+    public int getRowCount() {
+        return this.libros.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return this.columna.length;
+    }
+
+    @Override
+    public Object getValueAt(int fila, int columna) {
+        Object resp;
+
+        switch (columna){
+            case 0:
+                resp = this.libros.get(fila).getCodigo();
+                break;
+            case 1:
+                resp = this.libros.get(fila).getNombreLibro();
+                break;
+            case 2:
+                resp = this.libros.get(fila).getEditorial();
+                break;
+            default:
+                resp = this.libros.get(fila).getVisualizacion();
+                break;
+        }
+        return resp;
+    }
+
+    //@Override
+    public String getcolumnasnombre(int columna){
+        return this.columna[columna];
+    }
+    
+ 
+     public void actualizarTabla(){
+        fireTableDataChanged();
+    }
+
+    public Libros detalle (int fila){
+        return this.libros.get(fila);
+    }
+}
