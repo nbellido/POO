@@ -1,0 +1,52 @@
+
+package InventarioProyecto;
+
+public class Libros {
+    private int codigo;
+    private String NombreLibro;
+    private String Editorial;
+    private int visualizacion;
+
+ public Libros(int codigo, String nombreMaterial, String tipoMaterial, int cantidad) {
+        this.codigo = codigo;
+        NombreLibro = nombreMaterial;
+        Editorial = tipoMaterial;
+        this.visualizacion = cantidad;
+    }
+
+    public Libros(){
+
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombreLibro() {
+        return NombreLibro;
+    }
+
+    public void setNombreLibro(String nombreLibro) {
+        NombreLibro = nombreLibro;
+    }
+
+    public String getEditorial() {
+        return Editorial;
+    }
+
+    public void setEditorial(String editorial) {
+        Editorial = editorial;
+    }
+
+    public int getVisualizacion() {
+        return visualizacion;
+    }
+
+    public void setVisualizacion(int visualizacion) {
+        this.visualizacion = visualizacion;
+    }    
+}
